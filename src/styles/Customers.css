@@ -1,0 +1,169 @@
+.customer-container {
+    width: 100%;
+    /* margin-left: 150px; */
+    /* margin-right: 150px; */
+    /* margin: 110px; */
+    /* padding: 110px; */
+}
+
+.customer-heading {
+    color: rgb(1, 1, 18);
+    /* position: relative; */
+    right: 20%;
+    margin-top: 5px;
+    font-size: 25px;
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.customer-search {
+    margin-bottom: 15px;
+    /* position: relative; */
+    right: 20%;
+}
+
+.search-input {
+    width: 100%;  /* Ensure the input takes up the full width of the container */
+    max-width: 100%;  /* Prevent it from exceeding the container width */
+    /* padding: 10px; */
+    box-sizing: border-box;  /* Ensure padding doesn't affect the total width */
+}
+
+.customer-table {
+    width: 100%;  /* Full width of the container */
+    border-collapse: collapse;
+}
+
+.customer-table th, .customer-table td {
+    padding: 10px;
+    /* text-align: left; */
+    border-bottom: 1px solid #fbfdff;
+}
+
+table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Collapse borders for a cleaner look */
+    /* position: relative; */
+    right: 20%;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%; /* Input fields take up the full width of the table */
+    box-sizing: border-box; /* Ensure padding doesn't overflow */
+    padding: 18px; /* Padding inside input fields */
+    margin: 10px 0; /* Space around input fields */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+th, td {
+    padding: 12px; /* Padding inside table cells */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #ddd; /* Light gray border */
+}
+
+thead {
+    background-color: #3a444e;
+    color: rgb(250, 248, 248); /* White text for headers */
+}
+
+button {
+    background-color: white;
+    color: rgb(14, 2, 2); /* Black text for buttons */
+    padding: 8px 12px; /* Padding around buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+button:hover {
+    background-color: #3a444e; /* Darker blue on hover */
+}
+
+/* Action Menu Dropdown */
+.action-menu {
+    position: relative;
+}
+
+.three-dot-menu {
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 2; /* Ensure the button remains above dropdown */
+}
+
+.action-dropdown {
+    position: absolute;
+    top: -15px;
+    left: 45px; /* Adjusted to move the dropdown slightly to the side */
+    border: none;  /* Remove border */
+    z-index: 1; /* Dropdown behind the button */
+    padding: 15px;
+
+}
+
+.action-dropdown button {
+    display: block;
+    padding: 4px;
+    width: auto; /* Use only necessary width */
+    border: none;  /* Remove borders */
+    background: none;  /* Remove background */
+    cursor: pointer;
+    font-size: 15px; /* Smaller font size for dropdown buttons */
+    margin: 0; /* No margins */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 18px; /* Adjust heading font size */
+    }
+
+    th, td {
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        font-size: 14px; /* Adjust font size */
+        width: calc(100% - 16px); /* Full width with padding consideration */
+    }
+
+    button {
+        padding: 6px 8px; /* Adjust button padding */
+        font-size: 14px; /* Adjust button font size */
+    }
+
+    .dropdown-menu {
+        width: 100%; /* Full width for dropdown on small screens */
+    }
+
+    table {
+        font-size: 12px; /* Adjust table font size */
+        /* display: block; Make table responsive */
+        /* overflow-x: auto; Enable horizontal scrolling */
+        white-space: nowrap; /* Prevent text from wrapping */
+    }
+
+    table thead, 
+    table tbody, 
+    table th, 
+    table td {
+        display: block; 
+
+        /* Display cells as blocks for better responsiveness */
+    }
+
+    th, td {
+        text-align: right; /* Right align text for better readability */
+        /* padding: 10px; Padding adjustments */
+    }
+
+    .customer-heading {
+        font-size: 10px; /* Smaller heading for mobile */
+    }
+
+    .action-dropdown {
+        position: static;
+         /* Ensure dropdown behaves well in mobile */
+    }
+}

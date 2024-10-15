@@ -1,0 +1,85 @@
+/* General Dashboard Styling */
+.dashboard {
+    padding: 20px;
+}
+
+.dash-head{
+    font-size: 30px;
+    position: relative;
+    right:20%;
+    margin-top: 10px;
+    color: #03203e;
+    /* color: #7092b5; */
+}
+
+/* Stats Section */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    gap: 40px;
+   
+}
+
+/* Card Styles */
+.card {
+    background-color: #03203e;
+    border: 2px solid #5aacee;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin-top:70px;
+    box-shadow: 0 2px 5px rgba(216, 209, 209, 0.1);
+    text-align: center;
+    width: calc(100% - 40px);
+    max-width: 400px;
+    position: relative;
+    right: 13%;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: #f6f7f9;
+    font-size: 25px;
+}
+
+.card p {
+    font-size:20px;
+    font-weight: bold;
+    color: #f1f3f4;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dash-head {
+        font-size: 20px;
+        left: 10%; /* Reset position for smaller screens */
+        margin-top: 15px;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Adjust gap for better spacing */
+        margin-bottom: 30px; /* Remove extra bottom margin */
+    }
+
+    .card {
+        height: 90px;
+        padding: 40px;
+        max-width: 60%; /* Make cards full-width on smaller screens */
+        margin: 10px 10px; /* Provide some space between cards */
+        right: 0; /* Reset position for smaller screens */
+    }
+
+    .card h3{
+        margin-top: -10px;
+    }
+}
+

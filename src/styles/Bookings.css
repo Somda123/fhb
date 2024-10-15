@@ -1,0 +1,80 @@
+/* General styles for the bookings section */
+.bookings-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #e51919;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+.toggle-header {
+    font-size: 24px;
+    margin-bottom: 15px;
+    cursor: pointer; /* Pointer to indicate clickable */
+    display: flex;
+    justify-content: space-between; /* Aligns text and hamburger icon */
+    align-items: center;
+}
+
+.hamburger {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+/* Hidden content initially */
+.bookings-content {
+    display: none; /* Hidden by default */
+}
+
+/* Styles for the dropdown */
+.bookings-dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #df7e15;
+    cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    .bookings-section {
+        padding: 15px;
+    }
+
+    .toggle-header {
+        font-size: 20px;
+    }
+
+    .bookings-content h3 {
+        font-size: 18px;
+    }
+
+    .bookings-dropdown {
+        font-size: 14px; /* Adjust font size for the dropdown */
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+}
+
+/* Additional Responsive Styles */
+@media (max-width: 400px) {
+    .bookings-section {
+        padding: 10px; /* Further reduce padding on very small screens */
+    }
+
+    .toggle-header {
+        font-size: 18px; /* Further reduce font size */
+    }
+
+    .hamburger {
+        font-size: 20px; /* Adjust hamburger icon size */
+    }
+
+    .bookings-content h3 {
+        font-size: 16px; /* Further reduce heading size */
+    }
+}

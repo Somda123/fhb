@@ -1,0 +1,90 @@
+.settings-container {
+    display: flex;
+    padding: 20px;
+}
+
+/* Sidebar for settings options */
+.settings-options {
+    width: 250px; /* Fixed width for the sidebar */
+    padding: 0; /* Remove all padding */
+    border-right: 1px solid #ddd; /* Divider line */
+}
+
+.settings-options h2 {
+    text-align: left; /* Keep "Settings" heading aligned to the left */
+    margin-bottom: 20px; /* Space between the heading and the options */
+    padding-left: 0; /* No padding to push it further left */
+    position: relative;
+    right: 40%;
+}
+
+.settings-options ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    position: relative;
+    right: 80%;
+}
+
+.settings-options ul li {
+    padding: 10px;
+    cursor: pointer; /* Pointer cursor for clickable items */
+    transition: background-color 0.2s; /* Smooth background color transition */
+    padding-left: 0; /* No padding */
+    margin-left: 10px; /* Optional: Small left margin to avoid touching the edge */
+}
+
+.settings-options ul li:hover {
+    background-color: #f0f0f0; /* Change background on hover */
+}
+
+/* Main content area */
+.settings-content {
+    flex: 1; /* Take full width available */
+    padding-left: 20px;
+}
+
+.settings-content p {
+    text-align: left; /* Align content to the left */
+    margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .settings-container {
+        flex-direction: column; /* Stack sidebar and content vertically on small screens */
+    }
+
+    .settings-options {
+        width: 100%; /* Sidebar takes full width on mobile */
+        border-right: none; /* Remove right border on mobile */
+        border-bottom: 1px solid #ddd; /* Add bottom border on mobile */
+    }
+
+    .settings-content {
+        padding-left: 0; /* Remove left padding on mobile */
+    }
+}
+
+/* Additional Responsive Adjustments */
+
+/* Tablet Devices - Up to 1024px */
+@media (max-width: 1024px) {
+    .settings-options {
+        width: 200px; /* Adjust sidebar width for tablets */
+    }
+
+    .settings-content {
+        padding-left: 10px; /* Reduce padding for tablets */
+    }
+}
+
+/* Small Devices - Up to 480px */
+@media (max-width: 480px) {
+    .settings-options {
+        width: 100%; /* Full width for the sidebar */
+    }
+
+    .settings-content {
+        padding: 10px; /* Add padding for the content area */
+    }
+}

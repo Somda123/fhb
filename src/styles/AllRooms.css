@@ -1,0 +1,84 @@
+
+
+.room-head {
+    color: rgb(1, 1, 18);
+    position: relative;
+    right:20%;
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+p {
+    text-align: center; /* Center the description */
+    margin-bottom: 40px; /* Space below the description */
+}
+
+
+
+tr:hover {
+    background-color: #d7d9dc;
+     /* Highlight row on hover(over all effected) */
+}
+
+@media (max-width: 600px) {
+    /* Responsive styles for smaller screens */
+    th, td {
+        font-size: 14px; /* Adjust font size */
+        padding: 8px; /* Adjust padding */
+    }
+
+    h2 {
+        font-size: 18px; /* Adjust heading font size */
+    }
+
+    p {
+        font-size: 14px; /* Adjust description font size */
+    }
+
+    table {
+        font-size: 12px; /* Adjust table font size */
+    }
+
+    /* Stack table header above columns in a more readable format */
+    thead {
+        display: none; /* Hide the original header */
+    }
+
+    tbody tr {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack items vertically */
+        border-bottom: 1px solid #ddd; /* Add a border between items */
+        margin-bottom: 10px; /* Space between items */
+        padding: 10px; /* Padding around items */
+        background-color: #fff; /* Background color for items */
+    }
+
+    tbody tr div {
+        display: flex; /* Use flexbox for each item */
+        justify-content: space-between; /* Space between label and value */
+        padding: 5px; /* Padding around items */
+    }
+
+    tbody tr div:last-child {
+        border-bottom: none; /* Remove border for the last item */
+    }
+}
+
+/* Additional Responsive Styles */
+@media (max-width: 400px) {
+    .room-list {
+        padding: 10px; /* Further reduce padding on very small screens */
+    }
+
+    h2 {
+        font-size: 16px; /* Further reduce heading font size */
+    }
+
+    p {
+        font-size: 12px; /* Further reduce description font size */
+    }
+
+    th, td {
+        padding: 6px; /* Further adjust padding for smaller screens */
+    }
+}

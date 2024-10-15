@@ -1,0 +1,112 @@
+.booking-list {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.all-head{
+    color: rgb(1, 1, 18);
+    position: relative;
+    right:20%;
+    margin-top: 5px;
+}
+
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+thead th {
+    background-color: #030335;
+    padding: 10px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Ensure the table remains readable on smaller screens */
+@media (max-width: 768px) {
+    thead {
+        display: none; /* Hide table header on small screens */
+    }
+
+    tbody td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    tbody tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    tbody td::before {
+        content: attr(data-label); /* Use the attribute as a label for each field */
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    tbody td:last-child {
+        border-bottom: 0;
+    }
+}
+
+/* Style for ID images */
+.id-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Add some spacing between elements on small devices */
+@media (max-width: 480px) {
+    .booking-list {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+}
+
+/* Style for mobile-specific devices */
+@media (max-width: 320px) {
+    .booking-list {
+        padding: 5px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+}
+
+/* Additional Responsive Styles */
+@media (max-width: 400px) {
+    .booking-list {
+        padding: 8px; /* Adjust padding on small screens */
+    }
+
+    tbody td {
+        font-size: 12px; /* Adjust font size for better readability */
+    }
+
+    .id-image {
+        width: 40px; /* Smaller ID images for smaller screens */
+        height: 40px; /* Maintain aspect ratio */
+    }
+}

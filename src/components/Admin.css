@@ -1,0 +1,68 @@
+/* General Styles */
+/* .app {
+    display: flex;
+    transition: all 0.3s ease;
+    position: relative;
+  } */
+  
+  /* h1 {
+    font-size: 25px;
+  } */
+  
+  /* Sidebar Styles */
+  .sidebar {
+    /* width: 350px; */
+    background-color: #03203e;
+    color: rgb(238, 243, 245);
+    /* height: 100vh; */
+    position: relative;
+    /* gap: 40px; */
+    transition: transform 0.3s ease;
+    /* z-index: 999; Ensure it's above the content */
+    display: flex;
+    flex-direction: column;
+    /* overflow-y: auto; */
+    /* overflow-x: none; */
+  }
+  
+  .sidebar.closed {
+    width: 60px;
+    transform: translateX(0);
+  }
+  
+  .sidebar.open {
+    width: 200px; 
+    height:70vh;
+  
+  }
+  
+  /* Adjust Icons Visibility in Collapsed Mode */
+/*   
+  .sidebar.closed ul li i {
+    margin-right: 10;
+  } */
+  
+  .sidebar.closed ul li span {
+    display: flex; /* Hide text when sidebar is closed */
+  }
+  
+  .sidebar.open ul li span {
+    display: inline-block;
+  }
+  
+  /* Main Content */
+  .main-content {
+    flex-grow: 1;
+    /* padding: 20px; */
+    /* margin-left: 250px; */  /* this line take space */ /* Full sidebar width */
+    transition: margin-left 0.3s ease;
+  }
+  
+  .sidebar.closed ~ .main-content {
+    margin-left: 60px; 
+    /* Adjust content when sidebar is collapsed */
+  }
+  
+  /* Responsive Styles */
+  
+  

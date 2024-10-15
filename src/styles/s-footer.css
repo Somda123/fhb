@@ -1,0 +1,40 @@
+.footer {
+    background-color: #2a2b2c;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Squada One', sans-serif;
+  }
+  
+  .footer-left {
+    width: 45%;
+  }
+  
+  .footer-right {
+    width: 50%;
+  }
+  
+  .ownership p, .footer-contact h3 {
+    color: whitesmoke;
+  }
+  
+  .social-icons a {
+    color: #00aaff;
+  }
+  
+  .social-icons a:hover {
+    color: #007bb5;
+  }
+  
+  /* Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer-left, .footer-right {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  
