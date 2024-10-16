@@ -4,12 +4,21 @@ import '../styles/Customers.css';
 const CustomerTable = ({ customers, onCustomerUpdate }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [editCustomerId, setEditCustomerId] = useState(null);
-    const [editedCustomer, setEditedCustomer] = useState({ name: '', phone: '', email: '', checkInDate: '', roomType: 'Ordinary', status: 'Active', idImage: null, location: '' });
-    const [activeDropdown, setActiveDropdown] = useState(null);  // For handling the dropdown state
+    const [editedCustomer, setEditedCustomer] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        checkInDate: '',
+        roomType: 'Ordinary',
+        status: 'Active',
+        idImage: null,
+        location: ''
+    });
+    const [activeDropdown, setActiveDropdown] = useState(null);
 
     useEffect(() => {
         if (onCustomerUpdate) {
-            onCustomerUpdate(customers); // Update parent state with customer data
+            onCustomerUpdate(customers);
         }
     }, [customers, onCustomerUpdate]);
 
@@ -32,34 +41,33 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
         );
         onCustomerUpdate(updatedCustomers);
         setEditCustomerId(null);
-        setActiveDropdown(null);  // Close the dropdown after saving
+        setActiveDropdown(null);
     };
 
     const toggleDropdown = (id) => {
-        setActiveDropdown(activeDropdown === id ? null : id); // Toggle dropdown on click
+        setActiveDropdown(activeDropdown === id ? null : id);
     };
 
-    // Filter customers by name, phone, email, or location
     const filteredCustomers = customers.filter(customer =>
         customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         customer.phone.includes(searchTerm) ||
-        (customer.email && customer.email.toLowerCase().includes(searchTerm)) || // Check if email exists before filtering
-        (customer.location && customer.location.toLowerCase().includes(searchTerm)) // Check location for filtering
+        (customer.email && customer.email.toLowerCase().includes(searchTerm)) ||
+        (customer.location && customer.location.toLowerCase().includes(searchTerm))
     );
 
     return (
-        <div className="customer-container">
-            <h2 className="customer-heading">Customer List</h2>
-            <div className="customer-search">
+        <div className="customer-wrapper">
+            <h2 className="customer-title">Customer List</h2>
+            <div className="customer-search-container">
                 <input
                     type="text"
                     placeholder="Search Customers"
                     value={searchTerm}
                     onChange={handleSearch}
-                    className="search-input"
+                    className="customer-search-input"
                 />
             </div>
-            <table className="customer-table">
+            <table className="customer-data-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -69,19 +77,19 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                         <th>Status</th>
                         <th>ID Image</th>
                         <th>Last Checkout Date</th>
-                        <th>Location</th> {/* New Location column */}
+                        <th>Location</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredCustomers.map(customer => (
+                    {filteredCustomers.length > 0 ? filteredCustomers.map(customer => (
                         <tr key={customer.id}>
                             <td>
                                 {editCustomerId === customer.id ? (
                                     <input
                                         value={editedCustomer.name}
                                         onChange={(e) => setEditedCustomer({ ...editedCustomer, name: e.target.value })}
-                                        className="edit-input"
+                                        className="customer-edit-input"
                                     />
                                 ) : (
                                     customer.name
@@ -92,7 +100,7 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                                     <input
                                         value={editedCustomer.phone}
                                         onChange={(e) => setEditedCustomer({ ...editedCustomer, phone: e.target.value })}
-                                        className="edit-input"
+                                        className="customer-edit-input"
                                     />
                                 ) : (
                                     customer.phone
@@ -104,7 +112,7 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                                         type="date"
                                         value={editedCustomer.checkInDate}
                                         onChange={(e) => setEditedCustomer({ ...editedCustomer, checkInDate: e.target.value })}
-                                        className="edit-input"
+                                        className="customer-edit-input"
                                     />
                                 ) : (
                                     customer.checkInDate
@@ -115,7 +123,7 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                                     <select
                                         value={editedCustomer.roomType}
                                         onChange={(e) => setEditedCustomer({ ...editedCustomer, roomType: e.target.value })}
-                                        className="edit-input"
+                                        className="customer-edit-input"
                                     >
                                         <option value="Ordinary">Ordinary</option>
                                         <option value="Government">Government</option>
@@ -129,7 +137,7 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                                     <select
                                         value={editedCustomer.status}
                                         onChange={(e) => setEditedCustomer({ ...editedCustomer, status: e.target.value })}
-                                        className="edit-input"
+                                        className="customer-edit-input"
                                     >
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>
@@ -145,18 +153,18 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                                     <input
                                         value={editedCustomer.location}
                                         onChange={(e) => setEditedCustomer({ ...editedCustomer, location: e.target.value })}
-                                        className="edit-input"
+                                        className="customer-edit-input"
                                     />
                                 ) : (
                                     customer.location
                                 )}
-                            </td> {/* Editable Location */}
-                            <td className="action-menu">
-                                <button className="three-dot-menu" onClick={() => toggleDropdown(customer.id)}>
+                            </td>
+                            <td className="customer-action-menu">
+                                <button className="customer-three-dot-menu" onClick={() => toggleDropdown(customer.id)}>
                                     &#x2022;&#x2022;&#x2022;
                                 </button>
                                 {activeDropdown === customer.id && (
-                                    <div className="action-dropdown">
+                                    <div className="customer-action-dropdown">
                                         {editCustomerId === customer.id ? (
                                             <button onClick={() => handleSaveCustomer(customer.id)}>Save</button>
                                         ) : (
@@ -167,7 +175,11 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                                 )}
                             </td>
                         </tr>
-                    ))}
+                    )) : (
+                        <tr>
+                            <td colSpan="9">No customers found</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>

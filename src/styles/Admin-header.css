@@ -1,4 +1,4 @@
-.header {
+.elder {
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -21,7 +21,7 @@
 /* Responsive header for smaller devices */
 @media (max-width: 768px) {
   
-    .header {
+    .elder {
       height: 50px; /* Adjusted height for smaller screens */
       padding-right: 10px; /* Reduced padding on the right */
       justify-content: space-between; /* Aligns items better on smaller screens */
@@ -36,7 +36,7 @@
   /* Even smaller devices (like mobile phones) */
   @media (max-width: 480px) {
   
-    .header {
+    .elder{
       height: 5px; /* Even smaller height */
       padding-left: 150px; /* Minimal padding */
     }

@@ -16,7 +16,7 @@ const Header = () => {
   }
 
   function handleAdmin(){
-    navigate('/admin')
+    navigate('/login')
   }
  
   return (

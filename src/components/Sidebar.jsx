@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import '../styles/Sidebar.css'; // Ensure the path is correct
+import '../styles/Sidebar.css'; // Ensure the path is correct
 
 const Sidebar = ({ onSidebarClick }) => {
     const [showBookingDropdown, setShowBookingDropdown] = useState(false);

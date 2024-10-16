@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../styles/s-footer.css';
+import '../styles/s-footer.css';
 
 const Footer = ({ contactName, email }) => {
     return (

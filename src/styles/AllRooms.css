@@ -1,84 +1,92 @@
-
+.room-list {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
 
 .room-head {
     color: rgb(1, 1, 18);
     position: relative;
-    right:20%;
+    right: 0%;
     margin-top: 5px;
     font-size: 30px;
 }
 
-p {
-    text-align: center; /* Center the description */
-    margin-bottom: 40px; /* Space below the description */
+/* Style for the table */
+.room-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
 }
 
-
-
-tr:hover {
-    background-color: #d7d9dc;
-     /* Highlight row on hover(over all effected) */
+.table-header {
+    background-color: #030335;
+    padding: 10px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
+.table-data {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table-row:hover {
+    background-color: #3256d8;
+}
+
+/* Responsive styles */
 @media (max-width: 600px) {
-    /* Responsive styles for smaller screens */
-    th, td {
-        font-size: 14px; /* Adjust font size */
-        padding: 8px; /* Adjust padding */
+    .table-header,
+    .table-data {
+        font-size: 14px;
+        padding: 8px;
     }
 
-    h2 {
-        font-size: 18px; /* Adjust heading font size */
+    .room-head {
+        font-size: 18px;
     }
 
-    p {
-        font-size: 14px; /* Adjust description font size */
+    .room-table {
+        font-size: 12px;
     }
 
-    table {
-        font-size: 12px; /* Adjust table font size */
-    }
-
-    /* Stack table header above columns in a more readable format */
     thead {
-        display: none; /* Hide the original header */
+        display: none;
     }
 
-    tbody tr {
-        display: flex; /* Use flexbox for layout */
-        flex-direction: column; /* Stack items vertically */
-        border-bottom: 1px solid #ddd; /* Add a border between items */
-        margin-bottom: 10px; /* Space between items */
-        padding: 10px; /* Padding around items */
-        background-color: #fff; /* Background color for items */
+    .table-row {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
     }
 
-    tbody tr div {
-        display: flex; /* Use flexbox for each item */
-        justify-content: space-between; /* Space between label and value */
-        padding: 5px; /* Padding around items */
-    }
-
-    tbody tr div:last-child {
-        border-bottom: none; /* Remove border for the last item */
+    .table-data {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px;
     }
 }
 
 /* Additional Responsive Styles */
 @media (max-width: 400px) {
     .room-list {
-        padding: 10px; /* Further reduce padding on very small screens */
+        padding: 10px;
     }
 
-    h2 {
-        font-size: 16px; /* Further reduce heading font size */
+    .room-head {
+        font-size: 16px;
     }
 
-    p {
-        font-size: 12px; /* Further reduce description font size */
-    }
-
-    th, td {
-        padding: 6px; /* Further adjust padding for smaller screens */
+    .table-header,
+    .table-data {
+        padding: 6px;
     }
 }

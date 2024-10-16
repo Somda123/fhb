@@ -1,169 +1,141 @@
-.customer-container {
+.customer-wrapper {
     width: 100%;
-    /* margin-left: 150px; */
-    /* margin-right: 150px; */
-    /* margin: 110px; */
-    /* padding: 110px; */
 }
 
-.customer-heading {
+.customer-title {
     color: rgb(1, 1, 18);
-    /* position: relative; */
-    right: 20%;
-    margin-top: 5px;
+    margin: 20px 0;
     font-size: 25px;
-    margin-bottom: 20px; /* Add some space below the heading */
+    text-align: center;
 }
 
-.customer-search {
+.customer-search-container {
     margin-bottom: 15px;
-    /* position: relative; */
-    right: 20%;
+    text-align: center;
 }
 
-.search-input {
-    width: 100%;  /* Ensure the input takes up the full width of the container */
-    max-width: 100%;  /* Prevent it from exceeding the container width */
-    /* padding: 10px; */
-    box-sizing: border-box;  /* Ensure padding doesn't affect the total width */
-}
-
-.customer-table {
-    width: 100%;  /* Full width of the container */
-    border-collapse: collapse;
-}
-
-.customer-table th, .customer-table td {
+.customer-search-input {
+    width: 80%;
+    max-width: 600px;
     padding: 10px;
-    /* text-align: left; */
+    box-sizing: border-box;
+}
+
+.customer-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.customer-data-table th,
+.customer-data-table td {
+    padding: 10px;
+    text-align: left;
     border-bottom: 1px solid #fbfdff;
 }
 
-table {
-    width: 100%; /* Full width of the container */
-    border-collapse: collapse; /* Collapse borders for a cleaner look */
-    /* position: relative; */
-    right: 20%;
+.customer-data-table th {
+    background-color: rgb(37, 34, 80);
+    color: white;
 }
 
 input[type="text"],
 input[type="email"] {
-    width: 100%; /* Input fields take up the full width of the table */
-    box-sizing: border-box; /* Ensure padding doesn't overflow */
-    padding: 18px; /* Padding inside input fields */
-    margin: 10px 0; /* Space around input fields */
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 4px; /* Rounded corners for inputs */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
-th, td {
-    padding: 12px; /* Padding inside table cells */
-    text-align: left; /* Align text to the left */
-    border: 1px solid #ddd; /* Light gray border */
-}
-
-thead {
-    background-color: #3a444e;
-    color: rgb(250, 248, 248); /* White text for headers */
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
 button {
     background-color: white;
-    color: rgb(14, 2, 2); /* Black text for buttons */
-    padding: 8px 12px; /* Padding around buttons */
-    cursor: pointer; /* Pointer cursor on hover */
+    color: rgb(14, 2, 2);
+    padding: 8px 12px;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: #3a444e; /* Darker blue on hover */
+    background-color: #3a444e;
 }
 
-/* Action Menu Dropdown */
-.action-menu {
+.customer-action-menu {
     position: relative;
 }
 
-.three-dot-menu {
+.customer-three-dot-menu {
     border: none;
     background: white;
     cursor: pointer;
     font-size: 18px;
-    z-index: 2; /* Ensure the button remains above dropdown */
+    z-index: 2;
 }
 
-.action-dropdown {
+.customer-action-dropdown {
     position: absolute;
     top: -15px;
-    left: 45px; /* Adjusted to move the dropdown slightly to the side */
-    border: none;  /* Remove border */
-    z-index: 1; /* Dropdown behind the button */
-    padding: 15px;
-
+    left: 45px;
+    border: 1px solid #ddd;
+    background: white;
+    z-index: 1;
+    padding: 10px;
 }
 
-.action-dropdown button {
+.customer-action-dropdown button {
     display: block;
     padding: 4px;
-    width: auto; /* Use only necessary width */
-    border: none;  /* Remove borders */
-    background: none;  /* Remove background */
+    width: auto;
+    border: none;
+    background: none;
     cursor: pointer;
-    font-size: 15px; /* Smaller font size for dropdown buttons */
-    margin: 0; /* No margins */
+    font-size: 15px;
+    margin: 0;
 }
 
 /* Responsive Styles */
 @media (max-width: 600px) {
-    h2 {
-        font-size: 18px; /* Adjust heading font size */
+    .customer-title {
+        font-size: 18px;
     }
 
-    th, td {
-        padding: 8px; /* Adjust padding for smaller screens */
+    th,
+    td {
+        padding: 8px;
     }
 
     input[type="text"],
     input[type="email"] {
-        font-size: 14px; /* Adjust font size */
-        width: calc(100% - 16px); /* Full width with padding consideration */
+        font-size: 14px;
     }
 
     button {
-        padding: 6px 8px; /* Adjust button padding */
-        font-size: 14px; /* Adjust button font size */
+        padding: 6px 8px;
+        font-size: 14px;
     }
 
-    .dropdown-menu {
-        width: 100%; /* Full width for dropdown on small screens */
+    .customer-data-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
-    table {
-        font-size: 12px; /* Adjust table font size */
-        /* display: block; Make table responsive */
-        /* overflow-x: auto; Enable horizontal scrolling */
-        white-space: nowrap; /* Prevent text from wrapping */
+    .customer-data-table th,
+    .customer-data-table td {
+        display: block;
+        text-align: right;
     }
 
-    table thead, 
-    table tbody, 
-    table th, 
-    table td {
-        display: block; 
-
-        /* Display cells as blocks for better responsiveness */
-    }
-
-    th, td {
-        text-align: right; /* Right align text for better readability */
-        /* padding: 10px; Padding adjustments */
-    }
-
-    .customer-heading {
-        font-size: 10px; /* Smaller heading for mobile */
-    }
-
-    .action-dropdown {
-        position: static;
-         /* Ensure dropdown behaves well in mobile */
+    .customer-data-table th::before {
+        content: attr(data-title);
+        float: left;
+        font-weight: bold;
+        text-align: left;
     }
 }

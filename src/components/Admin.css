@@ -1,49 +1,46 @@
 /* General Styles */
-/* .app {
+.app1 {
     display: flex;
     transition: all 0.3s ease;
     position: relative;
-  } */
+    flex-wrap: wrap;
+  }
   
-  /* h1 {
+  h1 {
     font-size: 25px;
-  } */
+  }
   
   /* Sidebar Styles */
   .sidebar {
-    /* width: 350px; */
+    width: 350px;
     background-color: #03203e;
     color: rgb(238, 243, 245);
-    /* height: 100vh; */
+    height: 100vh;
     position: relative;
-    /* gap: 40px; */
+    gap: 50px;
     transition: transform 0.3s ease;
-    /* z-index: 999; Ensure it's above the content */
+    z-index: 999; /* Ensure it's above the content */
     display: flex;
     flex-direction: column;
-    /* overflow-y: auto; */
-    /* overflow-x: none; */
+    overflow-y: auto;
   }
   
   .sidebar.closed {
-    width: 60px;
-    transform: translateX(0);
+    width: 60px; /* Sidebar collapsed width */
+    transform: translateX(0); /* Keep it in view */
   }
   
   .sidebar.open {
-    width: 200px; 
-    height:70vh;
-  
+    width: 300px; /* Sidebar full width */
   }
   
   /* Adjust Icons Visibility in Collapsed Mode */
-/*   
   .sidebar.closed ul li i {
-    margin-right: 10;
-  } */
+    margin-right: 10px; /* Ensure this is in px */
+  }
   
   .sidebar.closed ul li span {
-    display: flex; /* Hide text when sidebar is closed */
+    display: none; /* Hide text when sidebar is closed */
   }
   
   .sidebar.open ul li span {
@@ -53,16 +50,81 @@
   /* Main Content */
   .main-content {
     flex-grow: 1;
-    /* padding: 20px; */
-    /* margin-left: 250px; */  /* this line take space */ /* Full sidebar width */
+    padding: 20px;
+    margin-left: 150px; /* Full sidebar width */
     transition: margin-left 0.3s ease;
+    display: flex; /* Use flex to maintain table-like structure */
+    flex-direction: column; /* Ensure content stacks vertically */
   }
   
   .sidebar.closed ~ .main-content {
-    margin-left: 60px; 
-    /* Adjust content when sidebar is collapsed */
+    margin-left: 60px; /* Adjust content when sidebar is collapsed */
+  }
+  
+  /* Table Styles */
+  .table {
+    width: 100%; /* Ensure table uses full width */
+    border-collapse: collapse; /* Remove gaps between cells */
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ccc; /* Add borders to cells */
+    padding: 8px; /* Padding for cells */
+    text-align: left; /* Align text to the left */
   }
   
   /* Responsive Styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 250px; /* Set a smaller width for mobile */
+    }
   
+    .sidebar.closed {
+      width: 60px; /* Keep collapsed width */
+    }
+  
+    .main-content {
+      margin-left: 60px; /* Adjust content for small screens */
+      padding: 10px; /* Adjust padding for smaller devices */
+    }
+  
+    .table {
+      font-size: 14px; /* Smaller font size for the table */
+    }
+  
+    /* Ensure all table elements are responsive */
+    .table th, .table td {
+      padding: 5px; /* Reduce padding for smaller screens */
+    }
+  
+    h1 {
+      font-size: 20px; /* Adjust heading size for mobile */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .sidebar {
+      width: 200px; /* Smaller sidebar for very small screens */
+
+    }
+
+  
+    .main-content {
+      margin-left: 50px; /* Further adjust main content */
+      padding: 5px; /* Further reduce padding */
+    }
+  
+    .table {
+      font-size: 12px; /* Further reduce table font size */
+    }
+  
+    /* Further adjust table cell padding */
+    .table th, .table td {
+      padding: 3px;
+    }
+  
+    h1 {
+      font-size: 18px; /* Further adjust heading size */
+    }
+  }
   

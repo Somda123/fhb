@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import AllBooking from './AllBooking';
 import '../styles/Bookings.css';
 
 function Bookings() {
-    const [selectedPage, setSelectedPage] = useState(''); // State to store selected page
+    const [selectedPage, setSelectedPage] = useState('');
 
     const handleDropdownChange = (event) => {
         setSelectedPage(event.target.value);
@@ -11,7 +10,7 @@ function Bookings() {
 
     return (
         <div className="bookings-section">
-            <h2>Bookings</h2>
+            <h2 className="toggle-header">Bookings</h2>
             <select onChange={handleDropdownChange} className="bookings-dropdown">
                 <option value="">Select Booking Option</option>
                 <option value="all">All Bookings</option>
@@ -19,23 +18,19 @@ function Bookings() {
                 <option value="edit">Edit Booking</option>
             </select>
 
-            {/* Conditional rendering based on the dropdown selection */}
             {selectedPage === 'all' && (
-                <div>
+                <div className="bookings-content">
                     <h3>All Bookings</h3>
-                    <AllBooking /> {/* Render AllBooking List */}
+                    {/* Render AllBooking List */}
                 </div>
             )}
 
             {selectedPage === 'add' && (
-                <div>
+                <div className="bookings-content">
                     <h3>Add New Booking</h3>
-                    {/* Add booking form or content here */}
                     <p>Form to add new booking...</p>
                 </div>
             )}
-
-
         </div>
     );
 }

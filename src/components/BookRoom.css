@@ -37,7 +37,7 @@ h1, h2, h3 {
   border: solid thin whitesmoke;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
-  background-color: rgba(201, 245, 241, 0.5);
+  background-color: rgba(204, 225, 224, 0.5);
   z-index: 2;
 }
 
@@ -76,7 +76,7 @@ input::placeholder {
 .book-room-btn-book-now {
   font-weight: bolder;
   padding: 10px;
-  background-color: #61a7ee;
+  background-color: #1683f0;
   color: whitesmoke;
   border: none;
   border-radius: 4px;

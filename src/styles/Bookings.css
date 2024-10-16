@@ -12,20 +12,10 @@
 .toggle-header {
     font-size: 24px;
     margin-bottom: 15px;
-    cursor: pointer; /* Pointer to indicate clickable */
+    cursor: pointer;
     display: flex;
-    justify-content: space-between; /* Aligns text and hamburger icon */
+    justify-content: space-between;
     align-items: center;
-}
-
-.hamburger {
-    font-size: 24px;
-    margin-left: 10px;
-}
-
-/* Hidden content initially */
-.bookings-content {
-    display: none; /* Hidden by default */
 }
 
 /* Styles for the dropdown */
@@ -50,31 +40,23 @@
         font-size: 20px;
     }
 
-    .bookings-content h3 {
-        font-size: 18px;
-    }
-
     .bookings-dropdown {
-        font-size: 14px; /* Adjust font size for the dropdown */
-        padding: 8px; /* Adjust padding for smaller screens */
+        font-size: 14px;
+        padding: 8px;
     }
 }
 
 /* Additional Responsive Styles */
 @media (max-width: 400px) {
     .bookings-section {
-        padding: 10px; /* Further reduce padding on very small screens */
+        padding: 10px;
     }
 
     .toggle-header {
-        font-size: 18px; /* Further reduce font size */
+        font-size: 18px;
     }
 
-    .hamburger {
-        font-size: 20px; /* Adjust hamburger icon size */
-    }
-
-    .bookings-content h3 {
-        font-size: 16px; /* Further reduce heading size */
+    .bookings-dropdown {
+        font-size: 12px;
     }
 }

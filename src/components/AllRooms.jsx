@@ -13,26 +13,25 @@ const AllRooms = () => {
         { number: 8, rent: '', status: '' },
         { number: 9, rent: '', status: '' },
         { number: 10, rent: '', status: '' },
-        // Add more room data here
     ];
 
     return (
         <div className="room-list">
-            <h2 className='room-head'>Room List</h2>
-            <table>
+            <h2 className="room-head">Room List</h2>
+            <table className="room-table">
                 <thead>
                     <tr>
-                        <th>Room No.</th>
-                        <th>Rent</th>
-                        <th>Status</th>
+                        <th className="table-header">Room No.</th>
+                        <th className="table-header">Rent</th>
+                        <th className="table-header">Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {rooms.map((room) => (
-                        <tr key={room.number}>
-                            <td>{room.number}</td>
-                            <td>{room.rent}</td>
-                            <td>{room.status}</td>
+                        <tr key={room.number} className="table-row">
+                            <td className="table-data">{room.number}</td>
+                            <td className="table-data">{room.rent}</td>
+                            <td className="table-data">{room.status}</td>
                         </tr>
                     ))}
                 </tbody>
