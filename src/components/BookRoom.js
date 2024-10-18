@@ -12,10 +12,9 @@ const BookRoom = () => {
     checkInDate: new Date(),
     checkOutDate: new Date(),
     roomNumber: "",
-    numberOfGuests: 1,
-    numberOfRooms: 1,
+    numberOfGuests: "",
+    numberOfRooms: "",
   });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({

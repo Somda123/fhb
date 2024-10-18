@@ -68,8 +68,8 @@ const AddBooking = ({ onAddCustomer }) => {
                             <td><label htmlFor="roomType" className="add-booking-label">Room Type:</label></td>
                             <td>
                                 <select id="roomType" value={roomType} onChange={(e) => setRoomType(e.target.value)} required className="add-booking-select">
-                                    <option value="ordinary">Ordinary</option>
-                                    <option value="government">Government</option>
+                                    <option value="Non-Goverment">Non-Goverment</option>
+                                    <option value="government">Government Official</option>
                                 </select>
                             </td>
                         </tr>

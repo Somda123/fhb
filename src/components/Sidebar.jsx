@@ -91,10 +91,7 @@ const Sidebar = ({ onSidebarClick }) => {
                         <span>{(isSidebarOpen || isHovering) && 'Customers'}</span>
                     </li>
 
-                    <li onClick={() => onSidebarClick('dashboard')}>
-                        <i className="fa fa-bell"></i> {/* Dashboard icon */}
-                        <span>{(isSidebarOpen || isHovering) && 'Notifications'}</span>
-                    </li>
+                    
 
 
                     {/* <li onClick={() => onSidebarClick('payment')}> */}
