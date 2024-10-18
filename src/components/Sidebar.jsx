@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Sidebar.css'; // Ensure the path is correct
+import './Sidebar.css'; // Ensure the path is correct
 
 const Sidebar = ({ onSidebarClick }) => {
     const [showBookingDropdown, setShowBookingDropdown] = useState(false);
@@ -38,7 +38,7 @@ const Sidebar = ({ onSidebarClick }) => {
     };
 
     return (
-        <div className="app-container">
+        <div className="sidebar-container">
             {/* Sidebar */}
             <div
                 className={`sidebar ${isSidebarOpen || isHovering ? 'open' : 'closed'}`}
@@ -90,21 +90,28 @@ const Sidebar = ({ onSidebarClick }) => {
                         <i className="fa fa-users"></i> {/* Customers icon */}
                         <span>{(isSidebarOpen || isHovering) && 'Customers'}</span>
                     </li>
-                    <li onClick={() => onSidebarClick('payment')}>
-                        <i className="fa fa-money"></i> {/* Payment icon */}
-                        <span>{(isSidebarOpen || isHovering) && 'Payment'}</span>
+
+                    <li onClick={() => onSidebarClick('dashboard')}>
+                        <i className="fa fa-bell"></i> {/* Dashboard icon */}
+                        <span>{(isSidebarOpen || isHovering) && 'Notifications'}</span>
                     </li>
-                    <li onClick={() => onSidebarClick('settings')}>
-                        <i className="fa fa-cog"></i> {/* Settings icon */}
-                        <span>{(isSidebarOpen || isHovering) && 'Settings'}</span>
-                    </li>
+
+
+                    {/* <li onClick={() => onSidebarClick('payment')}> */}
+                        {/* <i className="fa fa-money"></i> Payment icon */}
+                        {/* <span>{(isSidebarOpen || isHovering) && 'Payment'}</span> */}
+                    {/* </li> */}
+                    {/* <li onClick={() => onSidebarClick('settings')}> */}
+                        {/* <i className="fa fa-cog"></i> Settings icon */}
+                        {/* <span>{(isSidebarOpen || isHovering) && 'Settings'}</span> */}
+                    {/* </li> */}
                 </ul>
             </div>
 
             {/* Main Content */}
-            <div className={`main-content ${isSidebarOpen || isHovering ? 'sidebar-open' : 'sidebar-closed'}`}>
+            {/* <div className={`main-content ${isSidebarOpen || isHovering ? 'sidebar-open' : 'sidebar-closed'}`}> */}
                 {/* Placeholder for dynamic content */}
-            </div>
+            {/* </div> */}
         </div>
     );
 };

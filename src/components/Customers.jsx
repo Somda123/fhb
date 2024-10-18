@@ -1,24 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Customers.css';
+import './Customers.css';
 
 const CustomerTable = ({ customers, onCustomerUpdate }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [editCustomerId, setEditCustomerId] = useState(null);
-    const [editedCustomer, setEditedCustomer] = useState({
-        name: '',
-        phone: '',
-        email: '',
-        checkInDate: '',
-        roomType: 'Ordinary',
-        status: 'Active',
-        idImage: null,
-        location: ''
-    });
-    const [activeDropdown, setActiveDropdown] = useState(null);
+    const [editedCustomer, setEditedCustomer] = useState({ name: '', phone: '', email: '', checkInDate: '', roomType: 'Ordinary', status: 'Active', idImage: null, location: '' });
+    const [activeDropdown, setActiveDropdown] = useState(null);  // For handling the dropdown state
 
     useEffect(() => {
         if (onCustomerUpdate) {
-            onCustomerUpdate(customers);
+            onCustomerUpdate(customers); // Update parent state with customer data
         }
     }, [customers, onCustomerUpdate]);
 
@@ -41,22 +32,23 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
         );
         onCustomerUpdate(updatedCustomers);
         setEditCustomerId(null);
-        setActiveDropdown(null);
+        setActiveDropdown(null);  // Close the dropdown after saving
     };
 
     const toggleDropdown = (id) => {
-        setActiveDropdown(activeDropdown === id ? null : id);
+        setActiveDropdown(activeDropdown === id ? null : id); // Toggle dropdown on click
     };
 
+    // Filter customers by name, phone, email, or location
     const filteredCustomers = customers.filter(customer =>
         customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         customer.phone.includes(searchTerm) ||
-        (customer.email && customer.email.toLowerCase().includes(searchTerm)) ||
-        (customer.location && customer.location.toLowerCase().includes(searchTerm))
+        (customer.email && customer.email.toLowerCase().includes(searchTerm)) || // Check if email exists before filtering
+        (customer.location && customer.location.toLowerCase().includes(searchTerm)) // Check location for filtering
     );
 
     return (
-        <div className="customer-wrapper">
+        <div className="customer-container">
             <h2 className="customer-title">Customer List</h2>
             <div className="customer-search-container">
                 <input
@@ -64,7 +56,7 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                     placeholder="Search Customers"
                     value={searchTerm}
                     onChange={handleSearch}
-                    className="customer-search-input"
+                    className="search-input"
                 />
             </div>
             <table className="customer-data-table">
@@ -77,12 +69,12 @@ const CustomerTable = ({ customers, onCustomerUpdate }) => {
                         <th>Status</th>
                         <th>ID Image</th>
                         <th>Last Checkout Date</th>
-                        <th>Location</th>
+                        <th>Location</th> {/* New Location column */}
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredCustomers.length > 0 ? filteredCustomers.map(customer => (
+                {filteredCustomers.length > 0 ? filteredCustomers.map(customer => (
                         <tr key={customer.id}>
                             <td>
                                 {editCustomerId === customer.id ? (

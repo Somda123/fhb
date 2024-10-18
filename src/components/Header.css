@@ -50,7 +50,7 @@
   }
   
   /* Hide the hamburger button on desktop */
-  .hamburger {
+  .hamburgr {
     display: none;
     font-size: 30px;
     background: none;
@@ -58,6 +58,8 @@
     cursor: pointer;
     color: #007bff;
     z-index: 101;
+    width: 65px;
+
   }
   
   /* Mobile Menu */
@@ -79,14 +81,25 @@
     display: flex;
   }
 
+  @media (max-width: 1024px){
+    .site-name {
+      font-size: 28px;
+    }
+  }
+  
   @media (max-width: 768px) {
     .header {
       padding: 20px;
     }
   
     .site-name {
-      font-size: 30px;
+      font-size: 40px;
     }
+
+    .site-name {
+      font-size: 28px;
+    }
+  
 
     .button-group{
         display: none;
@@ -100,7 +113,7 @@
       display: none;
     }
 
-    .hamburger {
+    .hamburgr {
       display: block;
     }
   
@@ -122,7 +135,8 @@
   
   @media (max-width: 480px) {
     .header .logo img {
-      height: 80px;
+      /* height: 80px; */
+      height: 60px;
     }
   
     .site-name {

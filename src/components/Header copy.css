@@ -1,0 +1,9 @@
+.header {
+    background-color: aliceblue;
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+    /* height: 50px; Adjust as per your design */
+    padding-right: 20px; /*Space from the right*/
+
+}

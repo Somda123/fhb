@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/AddBooking.css';
+import './AddBooking.css'; // Import corresponding CSS file
 
 const AddBooking = ({ onAddCustomer }) => {
     const [customerName, setCustomerName] = useState('');
@@ -9,26 +9,29 @@ const AddBooking = ({ onAddCustomer }) => {
     const [roomType, setRoomType] = useState('ordinary');
     const [status, setStatus] = useState('active');
     const [idImage, setIdImage] = useState(null);
-    const [location, setLocation] = useState('Dantewada');
+    const [location, setLocation] = useState('Dantewada'); // Location state added
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Create a new customer object
         const newCustomer = {
-            id: new Date().getTime(),
+            id: new Date().getTime(), // Unique ID based on current timestamp
             name: customerName,
             phone: phoneNumber,
-            checkInDate,
-            checkOutDate,
-            roomType,
-            status,
-            idImage: idImage ? idImage.name : null,
-            lastCheckout: checkOutDate,
-            location,
+            checkInDate: checkInDate,
+            checkOutDate: checkOutDate,
+            roomType: roomType,
+            status: status,
+            idImage: idImage ? idImage.name : null, // Use file name if image uploaded
+            lastCheckout: checkOutDate, // Assume checkout date is set when adding a booking
+            location: location, // Include location in the new customer object
         };
 
+        // Pass the new customer data to the parent component
         onAddCustomer(newCustomer);
 
+        // Reset form fields
         setCustomerName('');
         setPhoneNumber('');
         setCheckInDate('');
@@ -36,15 +39,15 @@ const AddBooking = ({ onAddCustomer }) => {
         setRoomType('ordinary');
         setStatus('active');
         setIdImage(null);
-        setLocation('Dantewada');
+        setLocation('Dantewada'); // Reset location to default
     };
 
     return (
         <div className="add-booking-container">
-            <h2 className="add-booking-title">Add Booking</h2>
+            <h2 className='add-booking-title'>Add Booking</h2>
             <form className="add-booking-form" onSubmit={handleSubmit}>
                 <table className="add-booking-table">
-                    <tbody>
+                <tbody>
                         <tr>
                             <td><label htmlFor="customerName" className="add-booking-label">Customer Name:</label></td>
                             <td><input type="text" id="customerName" value={customerName} onChange={(e) => setCustomerName(e.target.value)} required className="add-booking-input" /></td>

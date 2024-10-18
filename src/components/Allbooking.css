@@ -1,0 +1,172 @@
+.booking-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    /* margin: 0 auto; */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.all-head {
+    color: rgb(1, 1, 18);
+    /* position: relative; */
+    /* right: 0%; */
+    margin-top: 5px;
+}
+
+/* Style for the table */
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+.Allbooking-table-header {
+    background-color: #030335;
+    padding: 10px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #ddd;
+    color: white;
+}
+
+.Allbooking-table-data {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Ensure the table remains readable on smaller screens */
+/* @media (max-width: 768px) {
+    thead {
+        display: none;  Hide table header on small screens 
+    }
+
+    .table-row {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-data {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .table-data::before {
+        content: attr(data-label);  Use the attribute as a label for each field 
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+} */
+
+.id-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+    
+    /* Tablet */
+@media (max-width:768px){
+    .content {
+        width: 100vw;
+        padding: 10px;
+    }
+    .booking-list{
+        padding: 0px;
+    }
+    .all-head {
+        margin-top: 15px;
+    }
+    .booking-table {
+        margin-top: 0px;
+    }
+    .Allbooking-table-header th {
+        font-size: 14px;
+    }
+}
+    /* Phones */
+@media (max-width:667px) {
+    .content{
+        overflow-x: hidden;
+    }
+    .booking-list {
+        /* padding: 20px; */
+        /* margin: 0 auto; */
+        /* max-width: 100%; */
+        /* box-sizing: border-box; */
+        /* background-color:aliceblue; */
+        overflow: auto;
+    }
+
+    .all-head {
+        /* color: rgb(1, 1, 18); */
+        /* position: relative; */
+        /* left: 4%; */
+        margin: 0px;
+    }
+
+    /* Style for the table */
+
+    .booking-table {
+        /* width: 100%; */
+        /* border-collapse: collapse; */
+        margin-left: auto;
+        margin-top: 30px;
+        overflow: auto;
+        /* background-color: aqua; */
+    }
+
+    .Allbooking-table-header th {
+        /* background-color: #030335; */
+        /* padding: 10px; */
+        /* font-weight: bold; */
+        /* text-align: center; */
+        /* border: 1px solid #ddd; */
+        /* color: white; */
+        font-size: 10px;
+        
+    }
+
+    .Allbooking-table-data {
+        padding: 0px;
+        /* border: 1px solid #ddd; */
+        text-align: center;
+        font-size: 11px;
+        /* vertical-align: middle; */
+    }
+
+    .id-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width:376px){
+    .booking-list {
+        /* padding: 20px; */
+        /* margin: 0 auto; */
+        /* max-width: 100%; */
+        /* box-sizing: border-box; */
+        /* background-color:aliceblue; */
+        overflow: auto;
+    }
+    .booking-table {
+        width: 100%;
+        /* border-collapse: collapse; */
+        /* margin-top: 40px; */
+        overflow: auto;
+        /* background-color: aqua; */
+    }
+}

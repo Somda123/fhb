@@ -1,0 +1,89 @@
+.room-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 20px; */
+    /* margin: 0 auto; */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.room-head {
+    color: rgb(1, 1, 18);
+    /* position: relative; */
+    /* right: 0%; */
+    /* margin-top: 5px; */
+    font-size: 30px;
+}
+
+/* .room-list label {
+    margin-right: 10px;
+    font-size: 16px;
+    color: rgb(1, 1, 18);
+} */
+
+#location-select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    /* margin-bottom: 20px; */
+    /* Space between dropdown and table */
+}
+
+
+/* Style for the table */
+.room-table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 40px;
+}
+
+.AllRooms-table-header {
+    background-color: #030335;
+    padding: 10px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #ddd;
+    color: white;
+}
+
+.AllRooms-table-data {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.table-row:hover {
+    background-color: #3256d8;
+}
+
+@media (max-width:667px) {
+    /* .room-list { */
+        /* padding-left: 10px; */
+        /* Further reduce padding on very small screens */
+        /* background-color: rgb(162, 205, 243); */
+    /* } */
+
+    .room-head {
+        /* color: rgb(1, 1, 18); */
+        /* position: relative; */
+        /* right: 5%; */
+        margin-top: 5px;
+        /* font-size: 30px; */
+    }
+
+    .room-list tr:hover {
+        background-color: #3256d8;
+        /* Highlight row on hover */
+    }
+
+    .room-list table {
+        overflow-x: auto;
+        min-width: 15em;
+    }
+}
+/* @media (max-width:320px){
+
+} */

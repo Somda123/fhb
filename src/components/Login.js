@@ -1,6 +1,6 @@
 // src/component/Login.js
 import React, { useState } from 'react';
-import '../styles/Login.css';
+import './Login.css';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -49,8 +49,9 @@ function Login() {
           />
         </div>
         <button  type="submit" className='button'>Login</button>
-        <button  type="button" className="forgot-password-button">Forgot Password?</button>
         {showSuccessMessage && <p className="success-message">Login Successfully!</p>}
+
+        <button  type="button" className="forgot-password-button">Forgot Password?</button>
       </form>
     </div>
   );

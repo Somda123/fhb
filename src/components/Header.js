@@ -32,8 +32,9 @@ const Header = () => {
         <button onClick={handleAdmin} className="admin">Admin</button>
       </div>
 
-      <button className="hamburger" onClick={toggleMobileMenu}>
-        ☰
+      <button className="hamburgr" onClick={toggleMobileMenu}>
+        ☰ 
+        {/* &#9776;  */}
       </button>
 
       {/* Mobile menu with both buttons */}

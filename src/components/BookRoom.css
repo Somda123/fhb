@@ -37,9 +37,10 @@ h1, h2, h3 {
   border: solid thin whitesmoke;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
-  background-color: rgba(204, 225, 224, 0.5);
+  /* background-color: rgba(223, 235, 234, 0.5); */
   z-index: 2;
 }
+
 
 h2 {
   text-align: center;
@@ -69,8 +70,10 @@ input::placeholder {
   height: 2rem;
   padding: 8px;
   margin-bottom: 10px;
-  border: solid thin whitesmoke;
+  /* border: solid; */
+  /* border: solid thin whitesmoke; */
   border-radius: 10px;
+  
 }
 
 .book-room-btn-book-now {
@@ -152,6 +155,7 @@ input::placeholder {
   .book-room-input,
   .book-room-select {
     padding: 6px;
+    color: black;
   }
 
   .book-room-button {

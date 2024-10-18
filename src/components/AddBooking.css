@@ -1,24 +1,27 @@
 .add-booking-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 20px; */
+    width: 100vw;
+    /* margin: 20px auto; */
     font-family: Arial, sans-serif;
 }
 
 .add-booking-title {
-    position: relative;
-    left: 20%;
-    margin-top: -18px;
+    /* position: relative; */
+    /* left: 20%; */
+    /* margin-top: -18px; */
     font-size: 24px;
     color: #090843;
 }
 
-.add-booking-form {
-    width: 100%;
-}
+/* .add-booking-form { */
+/* width: 100%; */
+/* } */
 
 .add-booking-table {
-    width: 60%;
+    /* width: 60%; */
     border-collapse: collapse;
 }
 
@@ -50,7 +53,7 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    width: 60%;
+    width: 100%;
     margin-top: 20px;
 }
 
@@ -61,7 +64,7 @@
     outline: none;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .add-booking-container {
         max-width: 100%;
         padding: 15px;
@@ -79,14 +82,25 @@
     .add-booking-button {
         font-size: 14px;
     }
-}
-
-@media (max-width: 480px) {
-    .add-booking-title {
-        font-size: 20px;
+} */
+@media (max-width:667px) {
+    .add-booking-container {
+        /* padding: 20px; */
+        max-width: 800px;
+        /* Keep the width of the form */
+        /* margin: 20px auto; Center the form */
+        font-family: Arial, sans-serif;
+        /* background-color: blue; */
     }
 
-    .add-booking-button {
-        padding: 10px;
+    /* form {
+    width: 100%;
+} */
+    .add-booking-table {
+        width: 100%;
     }
+
+    
+
+    
 }
