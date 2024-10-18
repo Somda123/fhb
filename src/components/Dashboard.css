@@ -165,8 +165,7 @@
 }
 @media (max-width:668px) {
     .dashboard-container {
-        /* padding: 20px; */
-        /* background-color: bisque; */
+      
         width: 100%;
         overflow-x: hidden;
         overflow-y: auto;

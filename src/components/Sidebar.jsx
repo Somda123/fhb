@@ -90,25 +90,8 @@ const Sidebar = ({ onSidebarClick }) => {
                         <i className="fa fa-users"></i> {/* Customers icon */}
                         <span>{(isSidebarOpen || isHovering) && 'Customers'}</span>
                     </li>
-
-                    
-
-
-                    {/* <li onClick={() => onSidebarClick('payment')}> */}
-                        {/* <i className="fa fa-money"></i> Payment icon */}
-                        {/* <span>{(isSidebarOpen || isHovering) && 'Payment'}</span> */}
-                    {/* </li> */}
-                    {/* <li onClick={() => onSidebarClick('settings')}> */}
-                        {/* <i className="fa fa-cog"></i> Settings icon */}
-                        {/* <span>{(isSidebarOpen || isHovering) && 'Settings'}</span> */}
-                    {/* </li> */}
                 </ul>
             </div>
-
-            {/* Main Content */}
-            {/* <div className={`main-content ${isSidebarOpen || isHovering ? 'sidebar-open' : 'sidebar-closed'}`}> */}
-                {/* Placeholder for dynamic content */}
-            {/* </div> */}
         </div>
     );
 };

@@ -52,23 +52,19 @@ html{
 /* Main Content */
 .main-content {
   flex-grow: 1;
-  /* margin-left: 95px; Full sidebar width */
   transition: margin-left 0.3s ease;
-  /* background-color: blue; */
 }
 
 .sidebar.closed ~ .main-content {
   margin-left: 60px; /* Adjust content when sidebar is collapsed */
 }
  .content{
-  /* background-color: blueviolet; */
   width: 100vw;
   min-height:96.4vh;
   display: flex;
  }
  @media (max-width:667px){
   .container{
-    /* background-color: aqua; */
     max-height: 100vh;
     display: flex;
     overflow-y: hidden;
@@ -77,15 +73,13 @@ html{
  }
  @media (max-width:376px){
   .container{
-    /* background-color: aqua; */
-    /* width: 100vw; */
+   
     max-height: 100vh;
     display: flex;
     overflow-y: auto;
     overflow-x: auto;
   }
   .content{
-    /* width: 100vw; */
     overflow-y: auto;
   }
  }

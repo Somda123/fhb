@@ -23,7 +23,7 @@ function Login() {
     setTimeout(() => {
       setShowSuccessMessage(false);
       navigate('/admin')
-    }, 2000);
+    }, 500);
   };
 
   return (

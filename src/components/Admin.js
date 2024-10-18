@@ -1,8 +1,6 @@
-// import logo from './logo.svg';
 import React, { useState } from 'react';
 import './Admin.css';
 import Sidebar from './Sidebar';
-// import Header from './components/Header';
 import Dashboard from './Dashboard'
 import AllBooking from './Allbooking';
 import AddBooking from "./AddBooking"
@@ -11,7 +9,7 @@ import Customers from "./Customers"
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
-function App() {
+function Admin() {
   const [activePage, setActivePage] = useState('dashboard');
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [customers, setCustomers] = useState([]); // State to hold customer data
@@ -34,10 +32,7 @@ function App() {
     <>
       <div className={`container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}>
         <Sidebar isOpen={isSidebarOpen} onSidebarClick={handleSidebarClick} onToggle={toggleSidebar} />
-        {/* <div className={`main-content ${isSidebarOpen ? 'sidebar-open' : 'sidebar-closed'}`}> */}
-          {/* Header */}
-          {/* <Header /> */}
-          {/* Content */}
+        
           <div className="content">
             {/* content */}
             {activePage === 'dashboard' && <Dashboard />}
@@ -45,7 +40,6 @@ function App() {
             {activePage === 'addBooking' && <AddBooking onAddCustomer={handleAddCustomer} />}
             {activePage === 'allRooms' && <AllRooms />}
             {activePage === 'customers' && <Customers customers={customers} onCustomerUpdate={setCustomers} />}
-            {/* {activePage === 'settings' && <Settings />} */}
           </div>
         {/* </div> */}
       </div>
@@ -53,4 +47,4 @@ function App() {
   );
 }
 
-export default App;
+export default Admin;

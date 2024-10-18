@@ -14,7 +14,10 @@ const BookRoom = () => {
     roomNumber: "",
     numberOfGuests: "",
     numberOfRooms: "",
+    location: "Dantewada", // Default location
   });
+
+  // Function to handle input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,6 +26,7 @@ const BookRoom = () => {
     });
   };
 
+  // Function to handle file upload changes
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
@@ -30,6 +34,7 @@ const BookRoom = () => {
     });
   };
 
+  // Function to handle date picker changes
   const handleDateChange = (date, fieldName) => {
     setFormData({
       ...formData,
@@ -37,9 +42,20 @@ const BookRoom = () => {
     });
   };
 
+  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Booking submitted!");
+  };
+
+  // Function to get the maximum number of rooms based on location
+  const getMaxRooms = (location) => {
+    if (location === "Dantewada") {
+      return 6;
+    } else if (location === "Geedam" || location === "Barsoor") {
+      return 2;
+    }
+    return 1; // Fallback for safety
   };
 
   return (
@@ -49,9 +65,9 @@ const BookRoom = () => {
         <h2>Plan Your Stay With Us</h2>
         <form onSubmit={handleSubmit}>
           <div className="book-room-form-group">
-          <label> Full Name:</label>
-
-            <input className="book-room-input"
+            <label>Full Name:</label>
+            <input
+              className="book-room-input"
               type="text"
               name="name"
               placeholder="Name"
@@ -61,9 +77,9 @@ const BookRoom = () => {
             />
           </div>
           <div className="book-room-form-group">
-          <label> Mobile Number:</label>
-
-            <input className="book-room-input"
+            <label>Mobile Number:</label>
+            <input
+              className="book-room-input"
               type="text"
               name="mobile"
               placeholder="Mobile Number"
@@ -74,25 +90,24 @@ const BookRoom = () => {
           </div>
 
           <div className="book-room-form-group">
-          <label>Select location:</label>
-   <select 
-   className="book-room-select"
-             name="location"
+            <label>Select Location:</label>
+            <select
+              className="book-room-select"
+              name="location"
               value={formData.location}
               onChange={handleInputChange}
-              required >
-
-         <option value="Dantewada">Dantewada</option>
-         <option value="Geedam">Geedam</option>
-         <option value="Barsoor">Barsoor</option>
-
-   </select>
-
+              required
+            >
+              <option value="Dantewada">Dantewada</option>
+              <option value="Geedam">Geedam</option>
+              <option value="Barsoor">Barsoor</option>
+            </select>
           </div>
 
           <div className="book-room-form-group">
             <label>Number of Guests:</label>
-            <input className="book-room-input"
+            <input
+              className="book-room-input"
               type="number"
               name="numberOfGuests"
               value={formData.numberOfGuests}
@@ -104,12 +119,14 @@ const BookRoom = () => {
 
           <div className="book-room-form-group">
             <label className="book-room-dif">Number of Rooms:</label>
-            <input className="book-room-input"
+            <input
+              className="book-room-input"
               type="number"
               name="numberOfRooms"
               value={formData.numberOfRooms}
               onChange={handleInputChange}
               min="1"
+              max={getMaxRooms(formData.location)} // Dynamically set max based on location
               required
             />
           </div>
@@ -136,10 +153,11 @@ const BookRoom = () => {
               />
             </div>
           </div>
-          
+
           <div className="book-room-form-group">
             <label>Type:</label>
-            <select className="book-room-select"
+            <select
+              className="book-room-select"
               name="userType"
               value={formData.userType}
               onChange={handleInputChange}
@@ -149,17 +167,20 @@ const BookRoom = () => {
               <option value="government">Government Official</option>
             </select>
           </div>
+
           <div className="book-room-form-group">
             <label>
               Upload {formData.userType === "ordinary" ? "Aadhar/PAN" : "Government ID"}:
             </label>
-            <input className="book-room-input"
+            <input
+              className="book-room-input"
               type="file"
               name="idImage"
               onChange={handleFileChange}
               required
             />
           </div>
+
           <button type="submit" className="book-room-btn-book-now">Book Now</button>
         </form>
       </div>
