@@ -51,7 +51,7 @@ function Login() {
         <button  type="submit" className='button'>Login</button>
         {showSuccessMessage && <p className="success-message">Login Successfully!</p>}
 
-        <button  type="button" className="forgot-password-button">Forgot Password?</button>
+        {/* <button  type="button" className="forgot-password-button">Forgot Password?</button> */}
       </form>
     </div>
   );

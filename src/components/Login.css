@@ -61,7 +61,7 @@
   button:hover {
     background-color: #0056b3;
   }
-  
+/*   
   .forgot-password-button {
     background-color: transparent;
     color: #007bff;
@@ -71,11 +71,14 @@
     text-align: center;
     cursor: pointer;
     transition: color 0.3s ease;
-  }
-  
+  } */
+
+/*   
   .forgot-password-button:hover {
+    background-color: white;
+
     color: #0056b3;
-  }
+  } */
   
   .success-message {
     color: green;
