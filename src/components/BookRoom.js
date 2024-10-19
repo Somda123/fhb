@@ -14,19 +14,42 @@ const BookRoom = () => {
     roomNumber: "",
     numberOfGuests: "",
     numberOfRooms: "",
-    location: "Dantewada", // Default location
   });
 
-  // Function to handle input changes
+  const [isSubmitted, setIsSubmitted] = useState(false); // New state to track form submission
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+
+    // Validation for Name (Only allow text, no numbers)
+    if (name === "name") {
+      const textOnly = value.replace(/[0-9]/g, ''); // Remove numbers
+      setFormData({
+        ...formData,
+        [name]: textOnly,
+      });
+    }
+
+    // Validation for Mobile Number (Only allow numbers, limit to 10 digits)
+    else if (name === "mobile") {
+      const numberOnly = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      if (numberOnly.length <= 10) { // Limit to 10 digits
+        setFormData({
+          ...formData,
+          [name]: numberOnly,
+        });
+      }
+    }
+
+    // Handle other input fields normally
+    else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
-  // Function to handle file upload changes
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
@@ -34,7 +57,6 @@ const BookRoom = () => {
     });
   };
 
-  // Function to handle date picker changes
   const handleDateChange = (date, fieldName) => {
     setFormData({
       ...formData,
@@ -42,20 +64,10 @@ const BookRoom = () => {
     });
   };
 
-  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitted(true); // Set form as submitted
     alert("Booking submitted!");
-  };
-
-  // Function to get the maximum number of rooms based on location
-  const getMaxRooms = (location) => {
-    if (location === "Dantewada") {
-      return 6;
-    } else if (location === "Geedam" || location === "Barsoor") {
-      return 2;
-    }
-    return 1; // Fallback for safety
   };
 
   return (
@@ -63,126 +75,128 @@ const BookRoom = () => {
       <div className="book-room-bg-overlay"></div>
       <div className="book-room-form">
         <h2>Plan Your Stay With Us</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="book-room-form-group">
-            <label>Full Name:</label>
-            <input
-              className="book-room-input"
-              type="text"
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <div className="book-room-form-group">
-            <label>Mobile Number:</label>
-            <input
-              className="book-room-input"
-              type="text"
-              name="mobile"
-              placeholder="Mobile Number"
-              value={formData.mobile}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
 
-          <div className="book-room-form-group">
-            <label>Select Location:</label>
-            <select
-              className="book-room-select"
-              name="location"
-              value={formData.location}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="Dantewada">Dantewada</option>
-              <option value="Geedam">Geedam</option>
-              <option value="Barsoor">Barsoor</option>
-            </select>
+        {isSubmitted ? ( // Check if the form is submitted
+          <div className="submission-success">
+            <h3>Thank you! Your booking has been submitted successfully.</h3>
           </div>
-
-          <div className="book-room-form-group">
-            <label>Number of Guests:</label>
-            <input
-              className="book-room-input"
-              type="number"
-              name="numberOfGuests"
-              value={formData.numberOfGuests}
-              onChange={handleInputChange}
-              min="1"
-              required
-            />
-          </div>
-
-          <div className="book-room-form-group">
-            <label className="book-room-dif">Number of Rooms:</label>
-            <input
-              className="book-room-input"
-              type="number"
-              name="numberOfRooms"
-              value={formData.numberOfRooms}
-              onChange={handleInputChange}
-              min="1"
-              max={getMaxRooms(formData.location)} // Dynamically set max based on location
-              required
-            />
-          </div>
-
-          <div className="book-room-date-container">
+        ) : (
+          <form onSubmit={handleSubmit}>
             <div className="book-room-form-group">
-              <label>Check-in Date:</label>
-              <DatePicker
-                selected={formData.checkInDate}
-                onChange={(date) => handleDateChange(date, 'checkInDate')}
-                dateFormat="dd/MM/yyyy"
-                minDate={new Date()}
-                className="book-room-date-picker"
+              <label> Full Name:</label>
+              <input
+                className="book-room-input"
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
               />
             </div>
             <div className="book-room-form-group">
-              <label>Check-out Date:</label>
-              <DatePicker
-                selected={formData.checkOutDate}
-                onChange={(date) => handleDateChange(date, 'checkOutDate')}
-                dateFormat="dd/MM/yyyy"
-                minDate={formData.checkInDate}
-                className="book-room-date-picker"
+              <label> Mobile Number:</label>
+              <input
+                className="book-room-input"
+                type="text"
+                name="mobile"
+                placeholder="Mobile Number"
+                value={formData.mobile}
+                onChange={handleInputChange}
+                required
               />
             </div>
-          </div>
 
-          <div className="book-room-form-group">
-            <label>Type:</label>
-            <select
-              className="book-room-select"
-              name="userType"
-              value={formData.userType}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="ordinary">Non-Government</option>
-              <option value="government">Government Official</option>
-            </select>
-          </div>
+            <div className="book-room-form-group">
+              <label>Select location:</label>
+              <select
+                className="book-room-select"
+                name="location"
+                value={formData.location}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="Dantewada">Dantewada</option>
+                <option value="Geedam">Geedam</option>
+                <option value="Barsoor">Barsoor</option>
+              </select>
+            </div>
 
-          <div className="book-room-form-group">
-            <label>
-              Upload {formData.userType === "ordinary" ? "Aadhar/PAN" : "Government ID"}:
-            </label>
-            <input
-              className="book-room-input"
-              type="file"
-              name="idImage"
-              onChange={handleFileChange}
-              required
-            />
-          </div>
+            <div className="book-room-form-group">
+              <label>Number of Guests:</label>
+              <input
+                className="book-room-input"
+                type="number"
+                name="numberOfGuests"
+                value={formData.numberOfGuests}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
 
-          <button type="submit" className="book-room-btn-book-now">Book Now</button>
-        </form>
+            <div className="book-room-form-group">
+              <label className="book-room-dif">Number of Rooms:</label>
+              <input
+                className="book-room-input"
+                type="number"
+                name="numberOfRooms"
+                value={formData.numberOfRooms}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div className="book-room-date-container">
+              <div className="book-room-form-group">
+                <label>Check-in Date:</label>
+                <DatePicker
+                  selected={formData.checkInDate}
+                  onChange={(date) => handleDateChange(date, 'checkInDate')}
+                  dateFormat="dd/MM/yyyy"
+                  minDate={new Date()}
+                  className="book-room-date-picker"
+                />
+              </div>
+              <div className="book-room-form-group">
+                <label>Check-out Date:</label>
+                <DatePicker
+                  selected={formData.checkOutDate}
+                  onChange={(date) => handleDateChange(date, 'checkOutDate')}
+                  dateFormat="dd/MM/yyyy"
+                  minDate={formData.checkInDate}
+                  className="book-room-date-picker"
+                />
+              </div>
+            </div>
+
+            <div className="book-room-form-group">
+              <label>Type:</label>
+              <select
+                className="book-room-select"
+                name="userType"
+                value={formData.userType}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="ordinary">Non-Government</option>
+                <option value="government">Government Official</option>
+              </select>
+            </div>
+            <div className="book-room-form-group">
+              <label>
+                Upload {formData.userType === "ordinary" ? "Aadhar/PAN" : "Government ID"}:
+              </label>
+              <input
+                className="book-room-input"
+                type="file"
+                name="idImage"
+                onChange={handleFileChange}
+                required
+              />
+            </div>
+            <button type="submit" className="book-room-btn-book-now">Book Now</button>
+          </form>
+        )}
       </div>
     </>
   );
