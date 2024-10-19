@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './BookRoom.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import axios from 'axios';
 
 const BookRoom = () => {
   const [formData, setFormData] = useState({
@@ -92,30 +93,28 @@ const BookRoom = () => {
       total_Guest: formData.numberOfGuests,
     };
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', // Set content type to JSON
-        },
-        body: JSON.stringify(dataToSend), // Convert data to JSON
-        mode: 'no-cors', // Enable CORS
-      });
-
-      if (response.ok) {
-        const data = await response.json();
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+      mode: "no-cors",
+    })
+      .then((response) => {
+        console.log("Success:", response);
         setIsSubmitted(true); // Set form as submitted
         alert("Booking submitted!");
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert("Error occurred during booking.");
-    } finally {
-      setIsLoading(false); // Reset loading state
-    }
-  };
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error occurred during booking.");
+      })
+      .finally(() => {
+        setIsLoading(false); // Reset loading state
+      });
+  }
+
 
   return (
     <>
