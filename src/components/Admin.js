@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Admin.css';
 import Sidebar from './Sidebar';
 import Dashboard from './Dashboard'
-import AllBooking from './Allbooking';
+import AllBooking from './AllBooking';
 import AddBooking from "./AddBooking"
 import AllRooms from './AllRooms';
 import Customers from "./Customers"
