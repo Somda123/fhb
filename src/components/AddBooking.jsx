@@ -1,15 +1,19 @@
+
 import React, { useState } from 'react';
 import './AddBooking.css'; // Import corresponding CSS file
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; // Import datepicker styles
+import { format } from 'date-fns'; // Import date-fns for formatting
 
 const AddBooking = ({ onAddCustomer }) => {
     const [customerName, setCustomerName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [checkInDate, setCheckInDate] = useState('');
-    const [checkOutDate, setCheckOutDate] = useState('');
+    const [checkInDate, setCheckInDate] = useState(new Date());
+    const [checkOutDate, setCheckOutDate] = useState(new Date());
     const [roomType, setRoomType] = useState('ordinary');
     const [status, setStatus] = useState('active');
     const [idImage, setIdImage] = useState(null);
-    const [location, setLocation] = useState('Dantewada'); // Location state added
+    const [location, setLocation] = useState('Dantewada');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,13 +23,13 @@ const AddBooking = ({ onAddCustomer }) => {
             id: new Date().getTime(), // Unique ID based on current timestamp
             name: customerName,
             phone: phoneNumber,
-            checkInDate: checkInDate,
-            checkOutDate: checkOutDate,
+            checkInDate: format(checkInDate, 'dd/MM/yyyy'),
+            checkOutDate: format(checkOutDate, 'dd/MM/yyyy'),
             roomType: roomType,
             status: status,
-            idImage: idImage ? idImage.name : null, // Use file name if image uploaded
-            lastCheckout: checkOutDate, // Assume checkout date is set when adding a booking
-            location: location, // Include location in the new customer object
+            idImage: idImage ? idImage.name : null,
+            lastCheckout: format(checkOutDate, 'dd/MM/yyyy'),
+            location: location,
         };
 
         // Pass the new customer data to the parent component
@@ -34,12 +38,12 @@ const AddBooking = ({ onAddCustomer }) => {
         // Reset form fields
         setCustomerName('');
         setPhoneNumber('');
-        setCheckInDate('');
-        setCheckOutDate('');
+        setCheckInDate(new Date());
+        setCheckOutDate(new Date());
         setRoomType('ordinary');
         setStatus('active');
         setIdImage(null);
-        setLocation('Dantewada'); // Reset location to default
+        setLocation('Dantewada');
     };
 
     return (
@@ -47,7 +51,7 @@ const AddBooking = ({ onAddCustomer }) => {
             <h2 className='add-booking-title'>Add Booking</h2>
             <form className="add-booking-form" onSubmit={handleSubmit}>
                 <table className="add-booking-table">
-                <tbody>
+                    <tbody>
                         <tr>
                             <td><label htmlFor="customerName" className="add-booking-label">Customer Name:</label></td>
                             <td><input type="text" id="customerName" value={customerName} onChange={(e) => setCustomerName(e.target.value)} required className="add-booking-input" /></td>
@@ -58,17 +62,33 @@ const AddBooking = ({ onAddCustomer }) => {
                         </tr>
                         <tr>
                             <td><label htmlFor="checkIn" className="add-booking-label">Check-In Date:</label></td>
-                            <td><input type="date" id="checkIn" value={checkInDate} onChange={(e) => setCheckInDate(e.target.value)} required className="add-booking-input" /></td>
+                            <td>
+                                <DatePicker
+                                    selected={checkInDate}
+                                    onChange={(date) => setCheckInDate(date)}
+                                    dateFormat="dd/MM/yyyy" // Custom date format
+                                    className="add-booking-input"
+                                    required
+                                />
+                            </td>
                         </tr>
                         <tr>
                             <td><label htmlFor="checkOut" className="add-booking-label">Check-Out Date:</label></td>
-                            <td><input type="date" id="checkOut" value={checkOutDate} onChange={(e) => setCheckOutDate(e.target.value)} required className="add-booking-input" /></td>
+                            <td>
+                                <DatePicker
+                                    selected={checkOutDate}
+                                    onChange={(date) => setCheckOutDate(date)}
+                                    dateFormat="dd/MM/yyyy" // Custom date format
+                                    className="add-booking-input"
+                                    required
+                                />
+                            </td>
                         </tr>
                         <tr>
                             <td><label htmlFor="roomType" className="add-booking-label">Room Type:</label></td>
                             <td>
                                 <select id="roomType" value={roomType} onChange={(e) => setRoomType(e.target.value)} required className="add-booking-select">
-                                    <option value="Non-Goverment">Non-Goverment</option>
+                                    <option value="Non-Goverment">Non-Government</option>
                                     <option value="government">Government Official</option>
                                 </select>
                             </td>

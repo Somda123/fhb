@@ -101,6 +101,30 @@
       font-size: 15px;
     }
   }
+
+
+  .password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    padding-right: 30px; /* To leave space for the eye icon */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: #888; /* You can adjust the color */
+}
+
+.eye-icon:hover {
+    color: #333; /* Hover color */
+}
+
   
   @media (max-width: 480px) {
     .login-container {
@@ -129,4 +153,5 @@
       font-size: 13px;
     }
   }
+  
   
