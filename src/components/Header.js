@@ -32,7 +32,7 @@ const Header = () => {
       {isMobileMenuOpen && (
         <nav className="mobile-menu">
           <button onClick={handlebook} className="book-now mobile-only">Book Now</button>
-          <button onClick={handleAdmin} className="admin mobile-only">Admin</button>
+          {/* <button onClick={handleAdmin} className="admin mobile-only">Admin</button> */}
         </nav>
       )}
     </header>
