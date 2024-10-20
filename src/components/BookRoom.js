@@ -8,15 +8,15 @@ const BookRoom = () => {
     name: "",
     mobile: "",
     userType: "ordinary",
-    idImage: null,
     checkInDate: new Date(),
-    checkOutDate: new Date(),
-    roomNumber: "",
+    checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+    location: "Dantewada", // Set default location
     numberOfGuests: "",
     numberOfRooms: "",
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false); // New state to track form submission
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // To show loading state
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +41,42 @@ const BookRoom = () => {
       }
     }
 
+    // Validation for Number of Guests (Minimum 1, no upper limit)
+    else if (name === "numberOfGuests") {
+      let guests = parseInt(value, 10);
+      if (guests < 1) guests = 1; // Set minimum value to 1
+      setFormData({
+        ...formData,
+        [name]: guests.toString(),
+      });
+    }
+
+    // Validation for Number of Rooms based on location
+    else if (name === "numberOfRooms") {
+      let rooms = parseInt(value, 10);
+      
+      // Set location-based room limits
+      let maxRooms;
+      switch (formData.location) {
+        case 'Dantewada':
+          maxRooms = 6;
+          break;
+        case 'Barsoor':
+        case 'Geedam':
+          maxRooms = 2;
+          break;
+        default:
+          maxRooms = 10; // Default max rooms if location changes
+      }
+
+      if (rooms < 1) rooms = 1; // Set minimum value to 1
+      if (rooms > maxRooms) rooms = maxRooms; // Apply location-based max rooms
+      setFormData({
+        ...formData,
+        [name]: rooms.toString(),
+      });
+    }
+
     // Handle other input fields normally
     else {
       setFormData({
@@ -50,13 +86,6 @@ const BookRoom = () => {
     }
   };
 
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      idImage: e.target.files[0],
-    });
-  };
-
   const handleDateChange = (date, fieldName) => {
     setFormData({
       ...formData,
@@ -64,10 +93,73 @@ const BookRoom = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true); // Set form as submitted
-    alert("Booking submitted!");
+    setIsLoading(true); // Set loading state
+
+    const apiUrl = 'https://script.google.com/macros/s/AKfycbymCVh2pLtwKTr-YM2tAlKMqnfn3TMzCbg_mOnG_uJGW4l4ee5kBOD_T3iJlDj5yac2/exec'; // Replace with your API URL
+
+    // Format the check-in and check-out dates
+    const formatDateTime = (date) => {
+      const options = { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit', 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        hour12: true 
+      };
+      return new Intl.DateTimeFormat('en-US', options).format(date).replace(/,/g, '').replace(' ', ' '); // Remove extra commas and space
+    };
+
+    const checkInTime = formatDateTime(formData.checkInDate);
+    const checkOutTime = formatDateTime(formData.checkOutDate);
+
+    // Prepare the payload to send to the server
+    const dataToSend = {
+      checkInTime,
+      checkOutTime,
+      fullName: formData.name,
+      moNo: formData.mobile,
+      location: formData.location,
+      customerType: formData.userType === "ordinary" ? "Non-Government" : "Government Official",
+      aadharPan: 'ABCDE1234F', // Static Aadhar/PAN value
+      noOffRoom: formData.numberOfRooms,
+      total_Guest: formData.numberOfGuests,
+    };
+
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+      mode: "no-cors",
+    })
+      .then((response) => {
+        console.log("Success:", response);
+
+        // Clear form data after submission
+        setFormData({
+          name: "",
+          mobile: "",
+          userType: "ordinary",
+          checkInDate: new Date(),
+          checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+          location: "Dantewada",
+          numberOfGuests: "",
+          numberOfRooms: "",
+        });
+
+        setIsSubmitted(true); // Set form as submitted
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("Error occurred during booking.");
+      })
+      .finally(() => {
+        setIsLoading(false); // Reset loading state
+      });
   };
 
   return (
@@ -76,7 +168,7 @@ const BookRoom = () => {
       <div className="book-room-form">
         <h2>Plan Your Stay With Us</h2>
 
-        {isSubmitted ? ( // Check if the form is submitted
+        {isSubmitted ? (
           <div className="submission-success">
             <h3>Thank you! Your booking has been submitted successfully.</h3>
           </div>
@@ -131,6 +223,7 @@ const BookRoom = () => {
                 value={formData.numberOfGuests}
                 onChange={handleInputChange}
                 required
+                min="1"
               />
             </div>
 
@@ -143,6 +236,8 @@ const BookRoom = () => {
                 value={formData.numberOfRooms}
                 onChange={handleInputChange}
                 required
+                min="1"
+                max="10"
               />
             </div>
 
@@ -182,19 +277,9 @@ const BookRoom = () => {
                 <option value="government">Government Official</option>
               </select>
             </div>
-            <div className="book-room-form-group">
-              <label>
-                Upload {formData.userType === "ordinary" ? "Aadhar/PAN" : "Government ID"}:
-              </label>
-              <input
-                className="book-room-input"
-                type="file"
-                name="idImage"
-                onChange={handleFileChange}
-                required
-              />
-            </div>
-            <button type="submit" className="book-room-btn-book-now">Book Now</button>
+            <button type="submit" className="book-room-btn-book-now" disabled={isLoading}>
+              {isLoading ? "Booking..." : "Book Now"}
+            </button>
           </form>
         )}
       </div>
