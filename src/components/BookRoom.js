@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import './BookRoom.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import axios from 'axios';
 
 const BookRoom = () => {
   const [formData, setFormData] = useState({
@@ -40,6 +39,42 @@ const BookRoom = () => {
           [name]: numberOnly,
         });
       }
+    }
+
+    // Validation for Number of Guests (Minimum 1, no upper limit)
+    else if (name === "numberOfGuests") {
+      let guests = parseInt(value, 10);
+      if (guests < 1) guests = 1; // Set minimum value to 1
+      setFormData({
+        ...formData,
+        [name]: guests.toString(),
+      });
+    }
+
+    // Validation for Number of Rooms based on location
+    else if (name === "numberOfRooms") {
+      let rooms = parseInt(value, 10);
+      
+      // Set location-based room limits
+      let maxRooms;
+      switch (formData.location) {
+        case 'Dantewada':
+          maxRooms = 6;
+          break;
+        case 'Barsoor':
+        case 'Geedam':
+          maxRooms = 2;
+          break;
+        default:
+          maxRooms = 10; // Default max rooms if location changes
+      }
+
+      if (rooms < 1) rooms = 1; // Set minimum value to 1
+      if (rooms > maxRooms) rooms = maxRooms; // Apply location-based max rooms
+      setFormData({
+        ...formData,
+        [name]: rooms.toString(),
+      });
     }
 
     // Handle other input fields normally
@@ -103,8 +138,20 @@ const BookRoom = () => {
     })
       .then((response) => {
         console.log("Success:", response);
+
+        // Clear form data after submission
+        setFormData({
+          name: "",
+          mobile: "",
+          userType: "ordinary",
+          checkInDate: new Date(),
+          checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+          location: "Dantewada",
+          numberOfGuests: "",
+          numberOfRooms: "",
+        });
+
         setIsSubmitted(true); // Set form as submitted
-        alert("Booking submitted!");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -113,8 +160,7 @@ const BookRoom = () => {
       .finally(() => {
         setIsLoading(false); // Reset loading state
       });
-  }
-
+  };
 
   return (
     <>
@@ -177,6 +223,7 @@ const BookRoom = () => {
                 value={formData.numberOfGuests}
                 onChange={handleInputChange}
                 required
+                min="1"
               />
             </div>
 
@@ -189,6 +236,8 @@ const BookRoom = () => {
                 value={formData.numberOfRooms}
                 onChange={handleInputChange}
                 required
+                min="1"
+                max="10"
               />
             </div>
 
