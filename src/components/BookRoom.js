@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './BookRoom.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Swal from "sweetalert2";
+
 
 const BookRoom = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +19,30 @@ const BookRoom = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // To show loading state
+  const [roomData, setRoomData] = useState([]);
+
+
+  useEffect(() => {
+    // Fetch the room data from API
+    const fetchRoomData = async () => {
+      try {
+        const response = await fetch(
+          'https://script.google.com/macros/s/AKfycbymCVh2pLtwKTr-YM2tAlKMqnfn3TMzCbg_mOnG_uJGW4l4ee5kBOD_T3iJlDj5yac2/exec?location=Geedam'
+        );
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setRoomData(data);
+        console.log(data)
+      } catch (err) {
+        // setError(err.message);
+      } finally {
+        // setLoading(false);
+      }
+    };
+    fetchRoomData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +80,7 @@ const BookRoom = () => {
     // Validation for Number of Rooms based on location
     else if (name === "numberOfRooms") {
       let rooms = parseInt(value, 10);
-      
+
       // Set location-based room limits
       let maxRooms;
       switch (formData.location) {
@@ -96,18 +122,20 @@ const BookRoom = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true); // Set loading state
+    console.log(formData, 'This is the form Rooms Data-----');
+
 
     const apiUrl = 'https://script.google.com/macros/s/AKfycbymCVh2pLtwKTr-YM2tAlKMqnfn3TMzCbg_mOnG_uJGW4l4ee5kBOD_T3iJlDj5yac2/exec'; // Replace with your API URL
 
     // Format the check-in and check-out dates
     const formatDateTime = (date) => {
-      const options = { 
-        year: 'numeric', 
-        month: '2-digit', 
-        day: '2-digit', 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        hour12: true 
+      const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
       };
       return new Intl.DateTimeFormat('en-US', options).format(date).replace(/,/g, '').replace(' ', ' '); // Remove extra commas and space
     };
@@ -128,38 +156,144 @@ const BookRoom = () => {
       total_Guest: formData.numberOfGuests,
     };
 
-    fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataToSend),
-      mode: "no-cors",
-    })
-      .then((response) => {
-        console.log("Success:", response);
+    // Function to parse DD-MM-YYYY format into a Date object
+    function parseDate(dateString) {
+      if (typeof dateString === 'string') {
+        var parts = dateString.split('-'); // Assuming the format is DD-MM-YYYY
+        return new Date(parts[2], parts[1] - 1, parts[0]); // Create Date object (months are 0-indexed)
+      }
+      // If it's already a Date object, return it as-is
+      return dateString instanceof Date ? dateString : new Date(dateString); // Ensure it's a Date object
+    }
 
-        // Clear form data after submission
-        setFormData({
-          name: "",
-          mobile: "",
-          userType: "ordinary",
-          checkInDate: new Date(),
-          checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-          location: "Dantewada",
-          numberOfGuests: "",
-          numberOfRooms: "",
-        });
 
-        setIsSubmitted(true); // Set form as submitted
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Error occurred during booking.");
-      })
-      .finally(() => {
-        setIsLoading(false); // Reset loading state
+    // Function to format the date as 'DD-MM-YYYY'
+    function formatDate(date) {
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}-${month}-${year}`; // Format: DD-MM-YYYY
+    }
+
+    // Assuming you have check-in and check-out dates as Date objects
+    // let checkInTime = new Date("2024-10-20");
+    // let checkOutTime = new Date("2024-10-21");
+
+    // Calculate the day difference
+    let netCheckInTime = new Date(checkInTime);
+    let netCheckOutTime = new Date(checkOutTime);
+    let dayDifference = Math.ceil((netCheckOutTime - netCheckInTime) / (1000 * 3600 * 24)); // Ensure positive difference
+    let roomsNeeded = 1; // Adjust as necessary
+    let unavailableDates = [];
+
+    // Loop through each day in the range
+    for (let day = 0; day < dayDifference; day++) {
+      // Create a new Date object for each day
+      let currentDate = new Date(netCheckInTime);
+      currentDate.setDate(netCheckInTime.getDate() + day); // Move to the next day
+
+      // Format the current date to match the structure
+      let formattedCurrentDate = formatDate(currentDate);
+
+      // Find the room data for the current date
+      let currentRoomData = roomData.data.find(entry => entry.date === formattedCurrentDate);
+
+      // Check if room data was found
+      if (!currentRoomData) {
+        console.log(`No room data available for ${formattedCurrentDate}`);
+        unavailableDates.push(formattedCurrentDate); // Track unavailable dates
+        continue; // Skip to the next date
+      }
+
+      // Count available rooms for the current date
+      let availableRoomsForDate = 0;
+
+      // Iterate over the room_data array
+      for (const room of currentRoomData.room_data) {
+        // Check for availability at the specified location
+        if (room.available_room > 0 && room.location === formData.location) {
+          availableRoomsForDate += room.available_room;
+        }
+      }
+
+      console.log(availableRoomsForDate, 'Available rooms for:', formattedCurrentDate);
+
+      // Check if there are enough available rooms
+      if (availableRoomsForDate < roomsNeeded) {
+        unavailableDates.push(formattedCurrentDate); // Track unavailable dates
+      }
+    }
+
+
+    // If rooms are not available on any date, return an error response
+    if (unavailableDates.length > 0) {
+      // alert(`Rooms are not available for the following dates: ${unavailableDates.join(', ')}`);
+      Swal.fire({
+        title: "Error!",
+        text: `Rooms are not available for the following dates: ${unavailableDates.join(', ')}`,
+        icon: "error",
       });
+      setIsLoading(false); // Reset loading state
+      // return;
+    } else {
+
+      fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+        mode: "no-cors",
+      })
+        .then((response) => {
+          console.log("Success:", response);
+
+          // Clear form data after submission
+          setFormData({
+            name: "",
+            mobile: "",
+            userType: "ordinary",
+            checkInDate: new Date(),
+            checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+            location: "Dantewada",
+            numberOfGuests: "",
+            numberOfRooms: "",
+          });
+
+          // setIsSubmitted(true); // Set form as submitted
+          Swal.fire({
+            title: "Success!",
+            text: "Your booking has been submitted successfully.",
+            icon: "success",
+          });
+          console.log("Success:", roomData);
+
+          setTimeout(() => {
+            fetch('https://script.google.com/macros/s/AKfycbymCVh2pLtwKTr-YM2tAlKMqnfn3TMzCbg_mOnG_uJGW4l4ee5kBOD_T3iJlDj5yac2/exec')
+              .then(response => response.json())
+              .then(data => {
+                console.log('Success:', data);
+                setRoomData(data);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+                alert("Error occurred during booking.");
+              });
+
+          }
+            , 2000);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Error occurred during booking.");
+        })
+        .finally(() => {
+          setIsLoading(false); // Reset loading state
+        });
+    }
+
+
+
   };
 
   return (
